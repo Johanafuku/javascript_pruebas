@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejercicio 3 - Lista dinámica </h1>
+    <a href="index.html">volver atrás</a>
+
+   <div>
+    <ul id="lista">
+        <li>Aceite de sesámo <button class="eliminar">Eliminar</button></li>
+        <li>Salsa soja <button class="eliminar">Eliminar</button></li>
+        <li>Vinagre de arroz <button class="eliminar">Eliminar</button></li>
+        <li>Zanahorias<button class="eliminar">Eliminar</button></li>
+
+    </ul>
+
+   </div>
+
+    <label for="text">Añadir texto:</label>
+    <input type="text" name="text" width="40px" id="nuevoTexto">
+    <button id="btnAgregar">Agregar</button>
+    
+<script>
+    
+   const lista = document.getElementById('lista')
+   const input = document.getElementById('nuevoTexto')
+   const btnAgregar = document.getElementById('btnAgregar')
+
+   btnAgregar.addEventListener('click', function(){
+
+    const texto = input.value;
+    //validar que no este vacio
+    if (texto.trim() === "") {
+            alert("Por favor escribe algo");
+            return;
+        }
+
+    //nuevo li
+    const nuevoLi = document.createElement("li");
+    
+    //nuevo boton eliminar
+    const botonEliminar = document.createElement("button");
+        botonEliminar.textContent = "Eliminar";
+        botonEliminar.classList.add("eliminar");
+
+    nuevoLi.textContent = texto + " ";
+    nuevoLi.appendChild(botonEliminar);
+    
+    //añadir nuevo li con texto y boton
+    lista.appendChild(nuevoLi);
+
+    input.value = '';
+
+    botonEliminar.addEventListener("click", function() {
+            lista.removeChild(nuevoLi);
+        });
+   });
+
+   // para los elementos ya en la lista
+   const botonesEliminar = document.querySelectorAll(".eliminar");
+
+    botonesEliminar.forEach(function(boton) {
+        boton.addEventListener("click", function() {
+            const li = boton.parentElement;
+            lista.removeChild(li);
+        });
+    });
+
+</script>
+</body>
+</html>

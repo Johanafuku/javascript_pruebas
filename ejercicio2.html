@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejercicio 2 - Contador de clicks </h1>
+    <a href="index.html">volver atrás</a>
+
+    <section class="ejer2">
+        <button id="btnContador">Contador </button> 
+        <p id="cuenta"> 0</p>
+    </section>
+    
+<script>
+    var btnCont = document.getElementById("btnContador")
+    var pCont = document.getElementById("cuenta")
+    var cuenta = 0;
+
+    btnCont.onclick = function (){
+        cuenta++;
+        pCont.textContent = cuenta;
+    }
+   
+
+</script>
+</body>
+</html>

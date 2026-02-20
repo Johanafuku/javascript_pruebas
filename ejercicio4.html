@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejercicio 4 - Filtro de busqueda en tiempo real</h1>
+    <a href="index.html">volver atrás</a>
+    <div class="ejer4">
+        <input type="text" width="40px" name="busqueda">
+    </div>
+
+    <ul id="listaPaises">
+        <li>Australia</li>
+        <li>Francia</li>
+        <li>Estados Unidos</li>
+        <li>Suecia</li>
+        <li>Belgica</li>
+        <li>Alemania</li>
+        <li>Chile</li>
+        <li>Mexico</li>
+    </ul>
+
+<script>
+
+    const input = document.querySelector("input[name='busqueda']");
+    const lista = document.getElementById("listaPaises");
+    const elementos = lista.getElementsByTagName("li");
+
+    input.addEventListener('input', function(){
+        const texto = input.value.toLowerCase();
+
+        for (let i=0; i< elementos.length; i++){
+            const contenido = elementos[i].textContent.toLowerCase();
+
+            if (contenido.includes(texto)){
+                elementos[i].style.display = 'list-item';
+            } else {
+                elementos[i].style.display = 'none';
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

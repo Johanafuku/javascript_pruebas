@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejercicio 6 - Temporizador con Inicio, Pausa y Reinicio</h1>
+    <div class="ejer6">
+    <a href="index.html">volver atrás</a>
+
+    <h2 id="reloj">00:00:00</h2>
+    <button id="iniciar">Iniciar</button>
+    <button id="pausar">Pausar</button>
+    <button id="reiniciar">Reiniciar</button>
+ </div>
+<script>
+
+    const tiempo = document.getElementById("reloj");
+    const btnIniciar = document.getElementById("iniciar");
+    const btnPausar = document.getElementById("pausar");
+    const btnReiniciar = document.getElementById("reiniciar");
+
+    // Variables de tiempo
+    let segundos = 0;
+    let minutos = 0;
+    let horas = 0;
+
+    let intervalo = null; 
+
+    function actualizarTiempo() {
+
+        segundos++;
+
+        if (segundos === 60) {
+            segundos = 0;
+            minutos++;
+        }
+
+        if (minutos === 60) {
+            minutos = 0;
+            horas++;
+        }
+
+        // Formato 2 dígitos
+        const seg = segundos.toString().padStart(2, "0");
+        const min = minutos.toString().padStart(2, "0");
+        const hor = horas.toString().padStart(2, "0");
+
+        tiempo.textContent = `${hor}:${min}:${seg}`;
+    }
+
+    // Iniciar
+    btnIniciar.addEventListener("click", function() {
+
+        if (intervalo === null) { // evita múltiples intervalos
+            intervalo = setInterval(actualizarTiempo, 1000);
+        }
+
+    });
+
+    // Pausar
+    btnPausar.addEventListener("click", function() {
+
+        clearInterval(intervalo);
+        intervalo = null;
+
+    });
+
+    // Reiniciar
+    btnReiniciar.addEventListener("click", function() {
+
+        clearInterval(intervalo);
+        intervalo = null;
+
+        segundos = 0;
+        minutos = 0;
+        horas = 0;
+
+        tiempo.textContent = "00:00:00";
+
+    });
+
+</script>
+</body>
+</html>
+
+</script>
+</body>
+</html>

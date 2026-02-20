@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejercicio 7 - Generador de Contraseñas Aleatorias</h1>
+    <div class="ejer7">
+    <a href="index.html">volver atrás</a>
+        <section class="detalle">
+            <label for="input">Especificar longitud de contraseña:</label>
+            <input type="text" name="input" id="input">
+            <button id="btnPass">Generar contraseña</button>
+        </section>
+    </div>
+<script>
+
+    //variables
+    const inputText = document.querySelector("input[name='input']")
+    const btnPass = document.getElementById('btnPass')
+    //detalles para las contraseñas
+    const letters = [
+    "a","b","c","d","e","f","g","h","i","j",
+    "k","l","m","n","o","p","q","r","s","t",
+    "u","v","w","x","y","z"
+    ];
+    const capitalLetters = [
+    "A","B","C","D","E","F","G","H","I","J",
+    "K","L","M","N","O","P","Q","R","S","T",
+    "U","V","W","X","Y","Z"
+    ];
+    const numbers = [1,2,3,4,5,6,7,8,9,0]
+    const specialChar = ['.',',','+','!','?','/','*']
+
+    //functiones para obtener valores random 
+    function randomLetters(){
+            let indice = Math.floor(Math.random() * letters.length);
+            const randomChar = letters[indice]
+            return randomChar;
+        }
+
+    function randomCapLetters(){
+        let indice = Math.floor(Math.random()*capitalLetters.length);
+        const randomCapChar = capitalLetters[indice]
+        return randomCapChar;
+    }
+
+    function randomNumbers(){
+        let indice = Math.floor(Math.random()*numbers.length);
+        const randomNumber = numbers[indice]
+        return randomNumber;
+    }
+
+    function randomSpecialChar(){
+        let indice = Math.floor(Math.random()*specialChar.length);
+        const randomSpecialChar = specialChar[indice]
+        return randomSpecialChar;
+    }
+
+    //añadir funcionalidad
+    btnPass.addEventListener('click', function(){
+        const numberInput = Number(inputText.value)
+
+        if (numberInput==='' || numberInput < 4) {
+                alert("La longitud debe ser mínimo 4, campo no puede estar vacío");
+            } else {
+            let newPass = '';        
+
+            while (newPass.length < numberInput) {
+                newPass += randomLetters();
+
+                if (newPass.length < numberInput)
+                    newPass += randomCapLetters();
+
+                if (newPass.length < numberInput)
+                    newPass += randomNumbers();
+
+                if (newPass.length < numberInput)
+                    newPass += randomSpecialChar();
+            };
+            alert('Contraseña generada: '+ newPass);
+            }
+            
+    });
+
+</script>
+</body>
+</html>

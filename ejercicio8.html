@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejercicio 8 - Contador de Palabras y Caracteres</h1>
+    <div class="ejer8">
+    <a href="index.html">volver atrás</a>
+
+    <section class="parrafo">
+        <label for="texto">Escribir párrafo:</label>
+        <textarea name="texto" id="parrafo" rows="10" cols="30"></textarea>
+    </section>
+
+    <section class="contador">
+        <p>Palabras: <span id="contadorPalabras">0</span></p>
+        <p>Caracteres (sin espacios): <span id="contadorCaracteres">0</span></p>
+    </section>
+
+ </div>
+<script>
+// Seleccionar items
+const textarea = document.getElementById("parrafo");
+const contadorPalabras = document.getElementById("contadorPalabras");
+const contadorCaracteres = document.getElementById("contadorCaracteres");
+
+// Evento en tiempo real
+textarea.addEventListener("input", function() {
+
+    const texto = textarea.value;
+
+    const textoSinEspacios = texto.replace(/\s/g, "");
+    contadorCaracteres.textContent = textoSinEspacios.length;
+
+    // Contar palabras
+    const textoLimpio = texto.trim();
+
+    if (textoLimpio === "") {
+        contadorPalabras.textContent = 0;
+    } else {
+        const palabras = textoLimpio.split(/\s+/);
+        contadorPalabras.textContent = palabras.length;
+    }
+
+});
+</script>
+</body>
+</html>

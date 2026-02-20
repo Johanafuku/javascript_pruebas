@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejercicio 5 - Mini calculadora</h1>
+    <a href="index.html">volver atrás</a>
+
+    <div class="calculadora">
+        <label for="number1">Primer número</label>
+        <input type="number" name="number1" id="number1">
+
+        <label for="number2">Segundo número</label>
+        <input type="number" name="number2" id="number2">
+
+        <label for="resultado">Resultado</label>
+        <input type="number" name="resultado" id="resultado">
+
+    </div>
+
+    <div class="calcBtns">
+        <button id="sumar">Sumar</button>
+        <button id="restar">Restar</button>
+        <button id="multiplicar">Multiplicar</button>
+        <button id="dividir">Dividir</button>
+        <button id="limpiar">Reiniciar</button>
+    </div>
+<script>
+    const number1 = document.querySelector("input[name='number1']");
+    const number2 = document.querySelector("input[name='number2']");
+    const resultado = document.querySelector("input[name='resultado']");
+
+    //seleccionar botones
+    const btnsumar = document.getElementById("sumar")
+    const btnrestar = document.getElementById("restar")
+    const btnmulti = document.getElementById("multiplicar")
+    const btndividir = document.getElementById("dividir")
+    const btnReiniciar = document.getElementById("limpiar");
+
+
+    function obtenerNumeros() {
+        const num1 = parseFloat(number1.value);
+        const num2 = parseFloat(number2.value);
+        return { num1, num2 };
+    }
+    //sumar
+    btnsumar.addEventListener("click", function() {
+        const { num1, num2 } = obtenerNumeros();
+        resultado.value = num1 + num2;
+    });
+    //restar
+    btnrestar.addEventListener("click", function() {
+        const { num1, num2 } = obtenerNumeros();
+        resultado.value = num1 - num2;
+    });
+    //multiplicar
+    btnmulti.addEventListener("click", function() {
+        const { num1, num2 } = obtenerNumeros();
+        resultado.value = num1 * num2;
+    });
+    //dividir
+    btndividir.addEventListener("click", function() {
+        const { num1, num2 } = obtenerNumeros();
+
+        if (num2 === 0) {
+            alert("No se puede dividir entre 0");
+            return;
+        }
+
+        resultado.value = num1 / num2;
+    });
+
+    btnReiniciar.addEventListener("click", function() {
+    
+        // Limpiar resultado
+        resultado.value = "";
+
+        // (Opcional) limpiar también los números
+        number1.value = "";
+        number2.value = "";
+});
+
+</script>
+</body>
+</html>

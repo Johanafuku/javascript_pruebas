@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejercicio 1 - Cambiador de color </h1>
+    <div class="ejer1">
+    <a href="index.html">volver atrás</a>
+
+    <button id="btnColor">cambiar color </button>
+ </div>
+<script>
+
+    const boton = document.getElementById('btnColor')
+
+    let hex = [1,2,3,4,5,6,7,8,9,"A","B","C","D","E","F"];
+
+    document.addEventListener('click', e => {
+        if (e.target === boton) {
+            let color = "#";
+            for (i=0; i < 6; i++) {
+                color += hex[randomNumber()]
+            }
+            document.body.style.background = color;
+        }
+    })
+
+    function randomNumber() {
+        return Math.floor(Math.random() * hex.length)
+    }
+
+</script>
+</body>
+</html>

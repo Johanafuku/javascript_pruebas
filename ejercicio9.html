@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejercicio 9 - Lista de Tareas con LocalStorage</h1>
+    <div class="ejer9">
+    <a href="index.html">volver atrás</a>
+
+    <h2>Lista de Tareas</h2>
+
+    <input type="text" id="nuevaTarea" placeholder="Escribe una tarea">
+    <button id="agregar">Agregar</button>
+
+    <ul id="listaTareas"></ul>
+
+    <button id="limpiarCompletadas">Eliminar completadas</button>
+
+     </div>
+<script>
+
+// Seleccionar items
+const input = document.getElementById("nuevaTarea");
+const btnAgregar = document.getElementById("agregar");
+const lista = document.getElementById("listaTareas");
+const btnLimpiar = document.getElementById("limpiarCompletadas");
+
+let tareas = [];
+
+// Cargar tareas desde localStorage al iniciar
+document.addEventListener("DOMContentLoaded", function() {
+
+    const tareasGuardadas = localStorage.getItem("tareas");
+
+    if (tareasGuardadas) {
+        tareas = JSON.parse(tareasGuardadas);
+        renderizarTareas();
+    }
+});
+
+function guardarEnLocalStorage() {
+    localStorage.setItem("tareas", JSON.stringify(tareas));
+}
+
+function renderizarTareas() {
+
+    lista.innerHTML = "";
+
+    tareas.forEach((tarea, index) => {
+
+        const li = document.createElement("li");
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = tarea.completada;
+
+        const texto = document.createElement("span");
+        texto.textContent = tarea.texto;
+
+        if (tarea.completada) {
+            texto.style.textDecoration = "line-through";
+        }
+
+        // Evento checkbox
+        checkbox.addEventListener("change", function() {
+            tareas[index].completada = checkbox.checked;
+            guardarEnLocalStorage();
+            renderizarTareas();
+        });
+
+        li.appendChild(checkbox);
+        li.appendChild(texto);
+
+        lista.appendChild(li);
+    });
+}
+
+btnAgregar.addEventListener("click", function() {
+
+    const texto = input.value.trim();
+
+    if (texto === "") return;
+
+    tareas.push({
+        texto: texto,
+        completada: false
+    });
+
+    input.value = "";
+
+    guardarEnLocalStorage();
+    renderizarTareas();
+});
+
+// Limpiar completadas
+btnLimpiar.addEventListener("click", function() {
+
+    tareas = tareas.filter(tarea => !tarea.completada);
+
+    guardarEnLocalStorage();
+    renderizarTareas();
+});
+</script>
+</body>
+</html>
